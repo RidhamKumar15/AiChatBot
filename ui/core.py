@@ -2,22 +2,15 @@ import dearpygui.dearpygui as dpg
 from PIL import Image
 import numpy as np
 import os
-from ui.callbacks import toggle_listening
-
-# Dummy callbacks (replace with real functions in your app)
-dpg.add_button(
-    label="Start Listening", 
-    tag="btn_listen",
-    callback=toggle_listening
-)
 
 def send_text_command(sender, app_data, user_data):
     print("User typed:", dpg.get_value("user_input"))
 
-def toggle_listening():
+def toggle_listening(sender, app_data, user_data):
     print("🎙️ Listening toggled")
+    # Here you can start your listening thread or logic
 
-def show_memory_window():
+def show_memory_window(sender, app_data, user_data):
     print("🧠 Memory view")
 
 def apply_theme():
@@ -32,6 +25,7 @@ def load_texture(path):
     image = image.transpose(Image.FLIP_TOP_BOTTOM)  # DPG expects this
     width, height = image.size
     channels = 4
+    # Correct: load as uint8, then convert
     data = np.frombuffer(image.tobytes(), dtype=np.uint8).astype(np.float32) / 255.0
 
     return width, height, channels, data
@@ -71,7 +65,7 @@ def create_main_window():
 
                 with dpg.group():
                     dpg.add_button(label="Start Listening", tag="btn_listen", callback=toggle_listening)
-                    dpg.add_button(label="View Memory", callback=show_memory_window)
+                    dpg.add_button(label="View Memory", tag="btn_memory", callback=show_memory_window)
 
     apply_theme()
     dpg.create_viewport(title='JARVIS', width=1000, height=700)
