@@ -1,0 +1,24 @@
+# Core LLM integration
+ollama
+
+# Speech-to-Text (STT)
+vosk
+sounddevice
+
+# Text-to-Speech (TTS)
+pyttsx3
+
+# Automation / Scheduling
+APScheduler
+
+# Memory (SQLite/JSON)
+sqlite-utils
+
+# Optional: Enhanced TTS
+coqui-tts
+
+# Optional: GUI
+dearpygui
+
+# Utility
+python-dotenv
